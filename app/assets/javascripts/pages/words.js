@@ -1,3 +1,5 @@
 page.at('words#index', function() {
-  alert('oi');
+  var Search = require('search');
+
+  new Search();
 });

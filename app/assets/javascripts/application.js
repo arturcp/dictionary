@@ -16,13 +16,15 @@
 
 //= require page
 //= require almond
+
+//= require_tree ./modules
 //= require_tree ./pages
 
 
+setTimeout(function() {
+  $('body').addClass('loaded');
+},100);
+
 $(document).on('ready page:load', function() {
   page.dispatch();
-
-  setTimeout(function() {
-    $('body').addClass('loaded');
-  },100);
 });
