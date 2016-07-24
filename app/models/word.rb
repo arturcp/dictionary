@@ -1,8 +1,11 @@
 class Word < ActiveRecord::Base
-  scope :unseen, -> (user) { where(user: user, seen: false) }
+  before_save :validate
+
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
 
   def valid_entry?
-     less_than_two_words? && contains_letters?
+    less_than_two_words? && contains_letters?
   end
 
   private
@@ -12,6 +15,10 @@ class Word < ActiveRecord::Base
   end
 
   def contains_letters?
-    /^\d*[a-z][a-z0-9 ]*$/.match(word)
+    /^\d*[a-z][a-z0-9 \-]*$/.match(word).present?
+  end
+
+  def validate
+    self.active = valid_entry?
   end
 end

@@ -6,7 +6,7 @@
 # * The order of the languages is, respectively, Portuguese, English and Italian
 # * Each worksheet has 4 columns: word, definition, examples and tags
 class Importer
-  attr_reader :file, :language, :worksheet, :ignored_list
+  attr_reader :file, :language, :worksheet
 
   def initialize(file:, language:)
     @file = file
@@ -29,11 +29,6 @@ class Importer
   private
 
   def save_word(row)
-    word = SpreadsheetRow.new(row, language).to_w
-    if word.valid_entry?
-      word.save!
-    else
-      @ignored_list << word
-    end
+    SpreadsheetRow.new(row, language).to_w.save!
   end
 end

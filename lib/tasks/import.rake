@@ -37,10 +37,11 @@ namespace :google_drive do
       # puts row[0]
     end
     bar.finished
+
     puts ''
     puts 'Ignored words:'
-    importer.ignored_list.each do |ignored|
-      puts ignored.word
+    Word.inactive.each do |inactive|
+      puts inactive.word
     end
   end
 end

@@ -38,4 +38,24 @@ describe Word do
       end
     end
   end
+
+  describe '#active' do
+    context 'when the word is invalid' do
+      let(:word) { Word.new(word: '') }
+
+      it 'sets the active status to false' do
+        word.save
+        expect(word.active).to eq(false)
+      end
+    end
+
+    context 'when the word is valid' do
+      let(:word) { Word.new(word: 'loren ipsum') }
+
+      it 'sets the active status to true' do
+        word.save
+        expect(word.active).to eq(true)
+      end
+    end
+  end
 end
