@@ -19,6 +19,7 @@
 .env
 spec/support/failures.txt
 .DS_Store
+config/google_api.json
 
 # Ignore Byebug command history file.
 .byebug_history
