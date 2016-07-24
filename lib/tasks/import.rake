@@ -6,7 +6,13 @@ namespace :google_drive do
     file = ENV.fetch('FILE', '')
 
     if file.present?
-      importer = Importer.new(file: file, language: Importer::ENGLISH)
+      Word.delete_all
+
+      importer = Importer.new(
+        file: file,
+        language: SpreadsheetLanguage::ENGLISH
+      )
+
       import_words(importer)
     else
       show_usage
@@ -31,5 +37,10 @@ namespace :google_drive do
       # puts row[0]
     end
     bar.finished
+    puts ''
+    puts 'Ignored words:'
+    importer.ignored_list.each do |ignored|
+      puts ignored.word
+    end
   end
 end
