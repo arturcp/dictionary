@@ -52,3 +52,4 @@ gem 'rails_12factor', group: :production
 gem 'google_drive'
 gem 'colorize'
 gem 'rake-progressbar', require: false
+gem 'materialize-sass'

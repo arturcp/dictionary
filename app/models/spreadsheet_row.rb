@@ -12,7 +12,7 @@ class SpreadsheetRow
 
   def to_w
     Word.new(
-      word: row[WORD],
+      word: row[WORD].downcase,
       meaning: row[MEANING],
       example: row[EXAMPLE],
       language: language

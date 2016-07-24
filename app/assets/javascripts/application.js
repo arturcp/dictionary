@@ -13,4 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+
+//= require page
+//= require almond
+//= require_tree ./pages
+
+
+$(document).on('ready page:load', function() {
+  page.dispatch();
+
+  setTimeout(function() {
+    $('body').addClass('loaded');
+  },100);
+});
