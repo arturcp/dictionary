@@ -1,24 +1,8 @@
-# README
+# Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+First of all, it is important to generate the `google_api.json` file inside the
+`config` folder. To do that, run the `authorize` rake and follow the instructions:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+  bin/rake google_drive:authorize
+```
