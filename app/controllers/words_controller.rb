@@ -1,6 +1,7 @@
-class WordsController
+class WordsController < ApplicationController
   def index
-
+    words = Word.active.where('word like :query', query: "#{search_params[:q]}%")
+    render json: words
   end
 
   private

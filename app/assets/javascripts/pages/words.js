@@ -1,4 +1,4 @@
-page.at('words#index', function() {
+page.at('home#index', function() {
   var Search = require('search');
 
   new Search();

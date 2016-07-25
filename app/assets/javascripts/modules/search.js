@@ -16,6 +16,10 @@ define('search', [], function() {
     var enterKeyCode = 13;
     if (e.keyCode === enterKeyCode) {
       $('body').removeClass('loaded');
+
+      $.getJSON(this.input.data('search-url'), function(data) {
+        $('body').addClass('loaded');
+      });
     }
   };
 
