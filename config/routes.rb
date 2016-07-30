@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'words', to: 'words#index'
+  get 'words', to: redirect('/')
+  post 'words', to: 'words#index'
   root 'home#index'
 end
