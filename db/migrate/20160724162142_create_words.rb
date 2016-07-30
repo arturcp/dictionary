@@ -5,7 +5,7 @@ class CreateWords < ActiveRecord::Migration[5.0]
       t.string 'meaning', default: '', null: false
       t.string 'example', default: '', null: false
       t.integer 'language', default: 1, null: false
-      t.boolean 'active', default: false, null: false
+      t.boolean 'active', null: true
 
       t.timestamps null: false
     end
