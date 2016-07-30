@@ -1,7 +1,6 @@
 class WordsController < ApplicationController
   def index
-    words = Word.active.where('word like :query', query: "#{search_params[:q]}%")
-    render json: words
+    find_words
   end
 
   private
@@ -10,11 +9,17 @@ class WordsController < ApplicationController
     search_params[:lang] || SpreadsheetLanguage::ENGLISH
   end
 
+  def find_words
+    @words = []
+    return unless search_params[:q]
+
+    @words = Word.active.where('word like :query', query: "#{search_params[:q]}%")
+  end
+
   def search_params
     params.permit(
       :lang,
       :q
     )
   end
-
 end
