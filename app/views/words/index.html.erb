@@ -1,0 +1,9 @@
+<div class="row">
+  <% @words.each_with_index do |word, index| %>
+    <%=
+      render 'card',
+        word: word.word,
+        description: word.meaning
+    %>
+  <% end %>
+</div>

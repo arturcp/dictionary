@@ -11,12 +11,23 @@
           </li>
         </ul>
 
-        <div class="header-search-wrapper hide-on-med-and-down">
-          <i class="material-icons">search</i>
-          <input type="text" name="search" class="header-search-input z-depth-2"
-            placeholder="Look up a word" id="search" data-search-url="<%= word_path %>">
-        </div>
+        <%= form_tag words_path, method: :get, enforce_utf8: false do %>
+          <div class="header-search-wrapper hide-on-med-and-down">
+            <i class="material-icons">search</i>
+            <input type="text" name="q" class="header-search-input z-depth-2"
+              placeholder="Look up a word" id="search">
 
+            <div id="search-options">
+              <input class="with-gap purple darken-4" name="search-option" type="radio" id="by-description" checked />
+              <label for="by-description">Description</label>
+
+              <input class="with-gap" name="search-option" type="radio" id="by-word" />
+              <label for="by-word">Word</label>
+            </div>
+          </div>
+          <button class="btn dictionary-submit waves-effect waves-light hide-on-med-and-down" type="submit"
+            name="action" id="search-button">Pesquisar</button>
+        <% end %>
       </div>
     </nav>
   </div>
