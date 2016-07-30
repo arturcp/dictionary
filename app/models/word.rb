@@ -1,5 +1,5 @@
 class Word < ActiveRecord::Base
-  before_save :validate
+  before_save :set_active_status, :capitalize_word
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
@@ -18,7 +18,13 @@ class Word < ActiveRecord::Base
     /^\d*[a-z][a-z0-9 \-]*$/.match(word).present?
   end
 
-  def validate
+  def set_active_status
+    return unless self.active.nil?
+
     self.active = valid_entry?
+  end
+
+  def capitalize_word
+    self.word = self.word.capitalize
   end
 end

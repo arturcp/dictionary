@@ -58,4 +58,13 @@ describe Word do
       end
     end
   end
+
+  describe '#save' do
+    let(:word) { Word.new(word: 'LOREN iPsUm') }
+
+    it 'capitalizes the word' do
+      word.save!
+      expect(word.word).to eq('Loren ipsum')
+    end
+  end
 end
