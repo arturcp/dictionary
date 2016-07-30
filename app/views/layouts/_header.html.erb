@@ -11,17 +11,19 @@
           </li>
         </ul>
 
-        <%= form_tag words_path, enforce_utf8: false do %>
+        <%= form_tag words_path do %>
           <div class="header-search-wrapper hide-on-med-and-down">
             <i class="material-icons">search</i>
             <input type="text" name="q" class="header-search-input z-depth-2"
               placeholder="Look up a word" id="search">
 
             <div id="search-options">
-              <input class="with-gap purple darken-4" name="search-option" type="radio" id="by-description" checked />
+              <input class="with-gap purple darken-4" name="search_type" type="radio"
+                id="by-description" value="<%= SearchType::MEANING %>" checked />
               <label for="by-description">Description</label>
 
-              <input class="with-gap" name="search-option" type="radio" id="by-word" />
+              <input class="with-gap" name="search_type" type="radio"
+                id="by-word" value="<%= SearchType::WORD %>" />
               <label for="by-word">Word</label>
             </div>
           </div>

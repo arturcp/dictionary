@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 20160724162142) do
   enable_extension "plpgsql"
 
   create_table "words", force: :cascade do |t|
-    t.string   "word",                       null: false
-    t.string   "meaning",    default: "",    null: false
-    t.string   "example",    default: "",    null: false
-    t.integer  "language",   default: 1,     null: false
-    t.boolean  "active",     default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "word",                    null: false
+    t.string   "meaning",    default: "", null: false
+    t.string   "example",    default: "", null: false
+    t.integer  "language",   default: 1,  null: false
+    t.boolean  "active"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end
