@@ -53,3 +53,4 @@ gem 'google_drive'
 gem 'colorize'
 gem 'rake-progressbar', require: false
 gem 'materialize-sass'
+gem 'loofah'

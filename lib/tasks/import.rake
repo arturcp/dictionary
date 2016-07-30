@@ -43,5 +43,6 @@ namespace :google_drive do
     Word.inactive.each do |inactive|
       puts inactive.word
     end
+    # TODO: CHECK THE NOKOGIRI GEM: https://github.com/sparklemotion/nokogiri
   end
 end
