@@ -1,0 +1,23 @@
+.dictionary-card {
+  box-shadow: 3px 3px 20px #000;
+  background-color: $card-background-color;
+  color: $card-color;
+
+  .card-action a {
+    color: $card-color !important;
+  }
+}
+
+.card-content {
+  background-color: #fff;
+  overflow: hidden;
+
+  @media only screen and (min-width: 993px) {
+    height: 215px;
+
+    div {
+      height: 145px;
+      overflow: scroll;
+    }
+  }
+}

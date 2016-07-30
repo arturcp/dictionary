@@ -1,3 +1,7 @@
+.logo-wrapper {
+  margin: 0 10px;
+}
+
 .header-search-wrapper {
   margin: 10px auto 0 240px;
   width: calc(100% - 600px);
@@ -30,4 +34,38 @@ input.header-search-input {
   font-weight: 400;
   outline: none;
   border-radius: 3px;
+}
+
+#search-button {
+  position: absolute;
+  top: 12px;
+  right: 125px;
+}
+
+#search-options {
+  width: 235px;
+  position: absolute;
+  right: -105px;
+  top: -10px;
+
+  label {
+    padding-left: 30px;
+    margin-right: 10px;
+    color: #fff;
+
+    &:before {
+      border: 2px solid $header-background-color;
+    }
+
+    &:after {
+      border: 2px solid $header-background-color;
+      background-color: $header-background-color;
+    }
+  }
+}
+
+.dictionary-submit {
+  box-shadow: 3px 3px 20px #000;
+  background-color: $card-background-color;
+  color: $card-color;
 }
