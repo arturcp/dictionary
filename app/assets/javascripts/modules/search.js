@@ -10,6 +10,8 @@ define('search', [], function() {
   fn._bindEvents = function() {
     this.input.focus();
     this.input.on('keyup', $.proxy(this._searchWord, this));
+
+    $(window).on('focus', $.proxy(this._selectTextOnSearchInput, this));
   };
 
   fn._searchWord = function(e) {
@@ -21,6 +23,10 @@ define('search', [], function() {
         $('body').addClass('loaded');
       });
     }
+  };
+
+  fn._selectTextOnSearchInput = function() {
+    this.input.focus().select();
   };
 
   return Search;
