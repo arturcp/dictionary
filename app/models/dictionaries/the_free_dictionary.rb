@@ -36,14 +36,21 @@ module Dictionaries
     end
 
     def self.invalid_class?(node)
-      %w{pron brand_copy}.include?(node['class'])
+      %w{pron brand_copy snd flImg}.include?(node['class'])
     end
 
     def self.formatted_fragment(fragment)
+      fragment = fragment.gsub("\n\n\n", "\n")
+
       parts = fragment.split("\n")
       # 2.times { parts.shift }
       parts.shift
+      parts.shift if invalid_part?(parts[0])
       parts.join("\n")
+    end
+
+    def self.invalid_part?(part)
+      part == " Â "
     end
   end
 end
