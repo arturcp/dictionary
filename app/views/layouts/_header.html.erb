@@ -14,7 +14,7 @@
         <%= form_tag words_path do %>
           <div class="header-search-wrapper hide-on-med-and-down">
             <i class="material-icons">search</i>
-            <input type="text" name="q" class="header-search-input z-depth-2"
+            <input type="text" name="query" class="header-search-input z-depth-2"
               placeholder="Look up a word" id="search" value="<%= @word if @word %>">
 
             <div id="search-options">

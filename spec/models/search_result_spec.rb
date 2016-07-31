@@ -20,13 +20,13 @@ describe SearchResult do
       end
 
       context 'and the query is provided' do
-        subject { SearchResult.new(search_type: search_type, q: 'rage') }
+        subject { SearchResult.new(search_type: search_type, query: 'rage') }
 
         it { expect(subject.words.count).to eq(1) }
       end
 
       context 'when the query does not match word case' do
-        subject { SearchResult.new(search_type: SearchType::MEANING, q: 'Care') }
+        subject { SearchResult.new(search_type: SearchType::MEANING, query: 'Care') }
 
         it { expect(subject.words.count).to eq(1) }
       end
@@ -42,13 +42,13 @@ describe SearchResult do
       end
 
       context 'and the query is provided' do
-        subject { SearchResult.new(search_type: search_type, q: 'behest') }
+        subject { SearchResult.new(search_type: search_type, query: 'behest') }
 
         it { expect(subject.words.count).to eq(1) }
       end
 
       context 'when the query does not match word case' do
-        subject { SearchResult.new(search_type: SearchType::WORD, q: 'Behest') }
+        subject { SearchResult.new(search_type: SearchType::WORD, query: 'Behest') }
 
         it { expect(subject.words.count).to eq(1) }
       end
@@ -57,13 +57,13 @@ describe SearchResult do
     context 'when the list includes inactive words' do
       it 'ignores the inactive word' do
         create(:word, :inactive, word: 'fake', meaning: 'another word with rage')
-        result = SearchResult.new(search_type: SearchType::MEANING, q: 'rage')
+        result = SearchResult.new(search_type: SearchType::MEANING, query: 'rage')
         expect(result.words.count).to eq(1)
       end
     end
 
     context 'when the query searches for a part of a word' do
-      subject { SearchResult.new(search_type: SearchType::WORD, q: 'herring') }
+      subject { SearchResult.new(search_type: SearchType::WORD, query: 'herring') }
       let!(:double_word) { create(:word, word: 'red herring') }
 
       it { expect(subject.words.count).to eq(1) }

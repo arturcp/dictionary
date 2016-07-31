@@ -25,3 +25,14 @@
 .highlight {
   background-color: $card-background-color;
 }
+
+#empty-result {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+
+  .card-panel {
+    width: 65%;
+    border-radius: 10px;
+  }
+}

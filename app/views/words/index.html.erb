@@ -7,4 +7,12 @@
         highlighted: @word
     %>
   <% end %>
+
+  <% if @words.empty? %>
+    <div id="empty-result">
+      <div class="card-panel waves-effect waves-dark purple darken-4">
+        <span class="white-text">No words were found with this criteria.</span>
+      </div>
+    </div>
+  <% end %>
 </div>

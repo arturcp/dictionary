@@ -1,7 +1,8 @@
 class WordsController < ApplicationController
   def index
-    @word = search_params[:q]
+    @word = search_params[:query]
     @search_type = search_params[:search_type]
+    @language = search_params[:language]
     @words = search_result
   end
 
@@ -9,15 +10,15 @@ class WordsController < ApplicationController
 
   def search_result
     @search_result ||= SearchResult.new(
-      q: search_params[:q],
+      query: search_params[:query],
       search_type: search_params[:search_type]
     ).words
   end
 
   def search_params
-    params.permit(
-      :lang,
-      :q,
+    @search_params ||= params.permit(
+      :language,
+      :query,
       :search_type
     )
   end

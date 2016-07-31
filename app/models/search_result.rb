@@ -1,8 +1,8 @@
 class SearchResult
-  def initialize(q: '', search_type: 'meaning', lang: nil)
-    @query = q.downcase
+  def initialize(query: '', search_type: 'meaning', language: nil)
+    @query = query.downcase
     @search_type = search_type
-    @language = lang || SpreadsheetLanguage::ENGLISH
+    @language = language || SpreadsheetLanguage::ENGLISH
   end
 
   def words
