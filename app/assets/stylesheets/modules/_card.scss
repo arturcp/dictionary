@@ -15,9 +15,13 @@
   @media only screen and (min-width: 993px) {
     height: 215px;
 
-    div {
+    .card-description {
       height: 145px;
       overflow: scroll;
     }
   }
+}
+
+.highlight {
+  background-color: #f4dd1d;
 }

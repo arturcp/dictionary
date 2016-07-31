@@ -1,5 +1,7 @@
 class WordsController < ApplicationController
   def index
+    @word = search_params[:q]
+    @search_type = search_params[:search_type]
     @words = search_result
   end
 

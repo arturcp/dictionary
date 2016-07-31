@@ -10,7 +10,8 @@ namespace :google_drive do
 
       importer = Importer.new(
         file: file,
-        language: SpreadsheetLanguage::ENGLISH
+        language: SpreadsheetLanguage::ENGLISH,
+        dictionary: Dictionaries::TheFreeDictionary
       )
 
       import_words(importer)

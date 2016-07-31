@@ -8,9 +8,10 @@
 class Importer
   attr_reader :file, :language, :worksheet
 
-  def initialize(file:, language:)
+  def initialize(file:, language:, dictionary:)
     @file = file
     @language = language
+    @dictionary = dictionary
     @worksheet = Spreadsheet.new(file: file).worksheet(language)
   end
 
@@ -29,6 +30,9 @@ class Importer
   private
 
   def save_word(row)
-    SpreadsheetRow.new(row, language).to_w.save!
+    candidate = SpreadsheetRow.new(row, language).to_w
+    candidate.meaning = @dictionary.look_up(candidate.word) if candidate.meaning.blank?
+    candidate.active = false unless candidate.meaning
+    candidate.save!
   end
 end

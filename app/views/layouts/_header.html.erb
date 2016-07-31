@@ -15,15 +15,19 @@
           <div class="header-search-wrapper hide-on-med-and-down">
             <i class="material-icons">search</i>
             <input type="text" name="q" class="header-search-input z-depth-2"
-              placeholder="Look up a word" id="search">
+              placeholder="Look up a word" id="search" value="<%= @word if @word %>">
 
             <div id="search-options">
               <input class="with-gap purple darken-4" name="search_type" type="radio"
-                id="by-description" value="<%= SearchType::MEANING %>" checked />
+                id="by-description" value="<%= SearchType::MEANING %>"
+                <%= 'checked' if @search_type == SearchType::MEANING || !@search_type %>
+              />
               <label for="by-description">Description</label>
 
               <input class="with-gap" name="search_type" type="radio"
-                id="by-word" value="<%= SearchType::WORD %>" />
+                id="by-word" value="<%= SearchType::WORD %>"
+                <%= 'checked' if @search_type == SearchType::WORD %>
+              />
               <label for="by-word">Word</label>
             </div>
           </div>
