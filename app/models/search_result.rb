@@ -8,6 +8,8 @@ class SearchResult
   def words
     return [] unless @query.present?
 
-    Word.active.where("lower(#{@search_type}) like :query", query: "%#{@query}%")
+    Word.active
+      .where("lower(#{@search_type}) like :query", query: "%#{@query}%")
+      .sort_by(&:word)
   end
 end
