@@ -6,8 +6,12 @@
         <%= format_description(description, highlighted) %>
       </div>
     </div>
+    <div style="background-color: #fff; padding: 5px">
+      <div class="chip">Tag 1</div>
+      <div class="chip">Tag 2</div>
+    </div>
     <div class="card-action">
-      <a href="#">Dictionary</a>
+      <%= link_to_dictionary(word) %>
       <a href="#">Thesaurus</a>
       <a href="#">Collocations</a>
     </div>

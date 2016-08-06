@@ -4,12 +4,15 @@ require 'open-uri'
 module Dictionaries
   class TheFreeDictionary
     def self.look_up(word)
-      url = "http://thefreedictionary.com/#{CGI::escape(word)}"
-      doc = Nokogiri::HTML(open(url))
+      doc = Nokogiri::HTML(open(url_for_word(word)))
       definition = doc.css('#Definition')[0].css('section')[0].to_s
       cleanup(definition)
     rescue
       ''
+    end
+
+    def self.url_for(word)
+      "http://thefreedictionary.com/#{CGI::escape(word.downcase)}"
     end
 
     private
