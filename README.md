@@ -17,3 +17,17 @@ First of all, it is important to generate the `google_api.json` file inside the
 ```
   bin/rake google_drive:authorize
 ```
+
+# Instructions
+
+To execute, go to the terminal and run:
+```
+  bin/rake google_drive:import FILE='<file id>'
+```
+
+If you want to delete all words and start again, add the option `DELETE_ALL=true`
+to the command:
+
+```
+  bin/rake google_drive:import FILE='<file id>' DELETE_ALL=true
+```

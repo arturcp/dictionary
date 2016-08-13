@@ -4,9 +4,10 @@ namespace :google_drive do
     require 'rake-progressbar'
 
     file = ENV.fetch('FILE', '')
+    delete_all = ENV.fetch('DELETE_ALL', '')
 
     if file.present?
-      Word.delete_all
+      Word.delete_all if delete_all.present?
 
       importer = Importer.new(
         file: file,

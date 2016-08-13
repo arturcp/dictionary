@@ -4,7 +4,7 @@ require 'open-uri'
 module Dictionaries
   class TheFreeDictionary
     def self.look_up(word)
-      doc = Nokogiri::HTML(open(url_for_word(word)))
+      doc = Nokogiri::HTML(open(url_for(word)))
       definition = doc.css('#Definition')[0].css('section')[0].to_s
       cleanup(definition)
     rescue

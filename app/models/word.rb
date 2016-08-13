@@ -1,5 +1,6 @@
 class Word < ActiveRecord::Base
   before_save :set_active_status, :capitalize_word
+  acts_as_taggable
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }

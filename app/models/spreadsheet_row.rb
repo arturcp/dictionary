@@ -2,6 +2,7 @@ class SpreadsheetRow
   WORD = 0
   MEANING = 1
   EXAMPLE = 2
+  TAG = 3
 
   attr_reader :row, :language
 
@@ -17,5 +18,22 @@ class SpreadsheetRow
       example: row[EXAMPLE],
       language: language
     )
+  end
+
+  def save_tags(word)
+    return unless tags.present?
+
+    word.tag_list.add(tags, parse: true)
+    word.save!
+  end
+
+  private
+
+  def tags
+    @tags ||= format(row[TAG])
+  end
+
+  def format(text)
+    text.downcase.delete('*').strip
   end
 end

@@ -16,8 +16,11 @@ class Importer
   end
 
   def start!(&block)
-    @ignored_list = []
+    word_count = Word.count
+
     worksheet.rows.each_with_index do |row, index|
+      next if index < word_count
+
       word = save_word(row)
       worksheet[index + 1, 2] = word.meaning if worksheet[index + 1, 2].blank?
 
@@ -34,10 +37,13 @@ class Importer
   private
 
   def save_word(row)
-    SpreadsheetRow.new(row, language).to_w.tap do |candidate|
+    spreadsheet_row = SpreadsheetRow.new(row, language)
+    spreadsheet_row.to_w.tap do |candidate|
       candidate.meaning = @dictionary.look_up(candidate.word) if candidate.meaning.blank?
       candidate.active = false unless candidate.meaning
       candidate.save!
+
+      spreadsheet_row.save_tags(candidate)
     end
   end
 end
