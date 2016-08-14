@@ -22,12 +22,29 @@ First of all, it is important to generate the `google_api.json` file inside the
 
 To execute, go to the terminal and run:
 ```
-  bin/rake google_drive:import FILE='<file id>'
+  bin/rake google_drive:import FILE='<file id>' OPTIONS
 ```
 
-If you want to delete all words and start again, add the option `DELETE_ALL=true`
-to the command:
+There are some valid options you can use to customize the behavior of the import
+procedure:
+
+ * DELETE: deletes all words in the database prior to run the rake. It accepts
+    two possible values:
+    * 'all': wipe out all entries in the database
+    * 'language': delete all entries from an specific language. The language
+      to be cleaned will be the one provided on the LANGUAGE option, which is
+      English (1) by default
+  * LANGUAGE: allows you to chose to which language the words to be imported
+    belong. The default value is English, and the codes are as follows:
+    * English: 0
+    * Portuguese: 1
+    * Italian: 2
+
+Example:
 
 ```
-  bin/rake google_drive:import FILE='<file id>' DELETE_ALL=true
+  bin/rake google_drive:import FILE='1234567878754545' DELETE='all' LANGUAGE='1'
 ```
+
+It will delete all words from all languages in the database and import the
+contents of the spreadsheet '1234567878754545' into the portuguese dictionary.

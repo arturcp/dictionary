@@ -1,4 +1,5 @@
 class SpreadsheetLanguage
-  PORTUGUESE = 1
   ENGLISH = 0
+  PORTUGUESE = 1
+  ITALIAN = 2
 end

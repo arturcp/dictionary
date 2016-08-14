@@ -1,18 +1,24 @@
 namespace :google_drive do
+  DICTIONARIES = {
+    SpreadsheetLanguage::PORTUGUESE => '',
+    SpreadsheetLanguage::ENGLISH => Dictionaries::TheFreeDictionary,
+    SpreadsheetLanguage::ITALIAN => ''
+  }
+
   desc 'Import words from the Google Drive spreadsheet'
   task import: :environment do
     require 'rake-progressbar'
 
     file = ENV.fetch('FILE', '')
-    delete_all = ENV.fetch('DELETE_ALL', '')
+    language = ENV.fetch('LANGUAGE', SpreadsheetLanguage::ENGLISH).to_i
 
     if file.present?
-      Word.delete_all if delete_all.present?
+      prepare_database
 
       importer = Importer.new(
         file: file,
-        language: SpreadsheetLanguage::ENGLISH,
-        dictionary: Dictionaries::TheFreeDictionary
+        language: language,
+        dictionary: DICTIONARIES[language]
       )
 
       import_words(importer)
@@ -46,5 +52,16 @@ namespace :google_drive do
       puts inactive.word
     end
     # TODO: CHECK THE NOKOGIRI GEM: https://github.com/sparklemotion/nokogiri
+  end
+
+  def prepare_database
+    return unless delete_option = ENV.fetch('DELETE', '').downcase
+
+    if delete_option == 'all'
+      Word.delete_all
+    elsif delete_option == 'language'
+      language = ENV.fetch('LANGUAGE', SpreadsheetLanguage::ENGLISH)
+      Word.where(language: language).delete_all
+    end
   end
 end
