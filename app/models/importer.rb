@@ -38,12 +38,11 @@ class Importer
 
   def save_word(row)
     spreadsheet_row = SpreadsheetRow.new(row, language)
-    spreadsheet_row.to_w.tap do |candidate|
-      candidate.meaning = @dictionary.look_up(candidate.word) if candidate.meaning.blank?
-      candidate.active = false unless candidate.meaning
-      candidate.save!
-
-      spreadsheet_row.save_tags(candidate)
+    spreadsheet_row.to_w.tap do |entry|
+      entry.meaning = @dictionary.look_up(entry.word) if entry.meaning.blank?
+      entry.active = false unless entry.meaning
+      entry.tag_list.add(spreadsheet_row.tags, parse: true) if spreadsheet_row.tags.present?
+      entry.save!
     end
   end
 end

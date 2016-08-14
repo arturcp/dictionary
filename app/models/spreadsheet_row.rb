@@ -20,18 +20,11 @@ class SpreadsheetRow
     )
   end
 
-  def save_tags(word)
-    return unless tags.present?
-
-    word.tag_list.add(tags, parse: true)
-    word.save!
-  end
-
-  private
-
   def tags
     @tags ||= format(row[TAG])
   end
+
+  private
 
   def format(text)
     text.downcase.delete('*').strip
