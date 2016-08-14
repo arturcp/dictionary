@@ -4,6 +4,7 @@ class Word < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
+  scope :by_word, -> { order('word ASC') }
 
   def valid_entry?
     less_than_two_words? && contains_letters?

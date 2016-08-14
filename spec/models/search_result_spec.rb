@@ -3,10 +3,16 @@ require 'rails_helper'
 describe SearchResult do
   before do
     create(:word, word: 'swerve', meaning: 'To turn aside or be turned aside from a straight path or established pattern')
-    create(:word, word: 'neophyte', meaning: 'A recent convert to a belief; a proselyte.')
+    neophyte = create(:word, word: 'neophyte', meaning: 'A recent convert to a belief; a proselyte.')
     create(:word, word: 'behest', meaning: 'An authoritative command.')
     create(:word, word: 'enraged', meaning: 'To put into a rage; infuriate.')
-    create(:word, word: 'consigned', meaning: 'To give over to the care or custody of another.')
+    consigned = create(:word, word: 'consigned', meaning: 'To give over to the care or custody of another.')
+
+    neophyte.tag_list.add('awesome', 'slick')
+    neophyte.save
+
+    consigned.tag_list.add('awesome')
+    consigned.save
   end
 
   describe '#words' do
@@ -52,6 +58,12 @@ describe SearchResult do
 
         it { expect(subject.words.count).to eq(1) }
       end
+    end
+
+    context 'when the search is by tag' do
+      subject { SearchResult.new(search_type: SearchType::TAG, query: 'Awesome') }
+
+      it { expect(subject.words.count).to eq(2) }
     end
 
     context 'when the list includes inactive words' do

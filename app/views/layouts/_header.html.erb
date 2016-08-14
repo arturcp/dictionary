@@ -29,6 +29,12 @@
                 <%= 'checked' if @search_type == SearchType::WORD %>
               />
               <label for="by-word">Word</label>
+
+              <input class="with-gap" name="search_type" type="radio"
+                id="by-tag" value="<%= SearchType::TAG %>"
+                <%= 'checked' if @search_type == SearchType::TAG %>
+              />
+              <label for="by-tag">Tag</label>
             </div>
           </div>
           <button class="btn dictionary-submit waves-effect waves-light hide-on-med-and-down" type="submit"
