@@ -22,7 +22,14 @@ class Importer
       next if index < word_count
 
       word = save_word(row)
-      worksheet[index + 1, 2] = word.meaning if worksheet[index + 1, 2].blank?
+
+      if worksheet[index + 1, 2].blank?
+        worksheet[index + 1, 2] = word.meaning
+        begin
+          worksheet.save if index % 10 == 0
+        rescue
+        end
+      end
 
       yield(row) if block_given?
     end
