@@ -12,9 +12,7 @@
       <% end %>
     </div>
     <div class="card-action">
-      <%= link_to_dictionary(word) %>
-      <%= link_to_thesaurus(word) %>
-      <%= link_to_collocation_dictionary(word) %>
+      <%= render "#{@language}_links", word: word %>
     </div>
   </div>
 </div>

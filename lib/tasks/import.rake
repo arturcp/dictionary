@@ -52,9 +52,11 @@ namespace :google_drive do
     bar.finished
 
     puts ''
-    puts 'Ignored words:'
-    Word.where(language: importer.language).inactive.each do |inactive|
-      puts inactive.word
+    if inactive_words = Word.where(language: importer.language).inactive
+      puts 'Ignored words:'
+      inactive_words.each do |inactive|
+        puts inactive.word
+      end
     end
   end
 

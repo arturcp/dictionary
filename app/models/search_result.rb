@@ -13,12 +13,6 @@ class SearchResult
 
   private
 
-  def search_by_words(query)
-    Word.active
-      .where("lower(#{@search_type}) like :query", query: "%#{@query}%")
-      .sort_by(&:word)
-  end
-
   def search_by_meaning(query)
     search_by_words(query)
   end
@@ -28,6 +22,13 @@ class SearchResult
   end
 
   def search_by_tag(query)
-    Word.active.tagged_with(query).by_word
+    Word.active.where(language: @language).tagged_with(query).by_word
+  end
+
+  def search_by_words(query)
+    Word.active
+      .where(language: @language)
+      .where("lower(#{@search_type}) like :query", query: "%#{@query}%")
+      .sort_by(&:word)
   end
 end
