@@ -16,7 +16,7 @@ class Importer
   end
 
   def start!(&block)
-    word_count = Word.count
+    word_count = Word.where(language: language).count
 
     worksheet.rows.each_with_index do |row, index|
       next if index < word_count

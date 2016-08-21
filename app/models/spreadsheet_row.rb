@@ -27,6 +27,6 @@ class SpreadsheetRow
   private
 
   def format(text)
-    text.downcase.delete('*').strip
+    text.to_s.downcase.delete('*').strip
   end
 end

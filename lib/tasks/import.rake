@@ -1,6 +1,6 @@
 namespace :google_drive do
   DICTIONARIES = {
-    SpreadsheetLanguage::PORTUGUESE => '',
+    SpreadsheetLanguage::PORTUGUESE => Dictionaries::Dicio,
     SpreadsheetLanguage::ENGLISH => Dictionaries::TheFreeDictionary,
     SpreadsheetLanguage::ITALIAN => ''
   }
@@ -29,29 +29,33 @@ namespace :google_drive do
 
   def show_usage
     puts ''
-    puts '**************************************************************************************'
-    puts "* #{"USAGE".red}: bin/rake google_drive:import #{"FILE='<file id>'".green}                               *"
-    puts '*                                                                                    *'
-    puts '* File id can be retrived from the Google Drive Spreadsheet URL. It looks like this: *'
-    puts "* #{"10BVvv01c6r2igfj5t8-XaFOP4lBvbbbxj1vZ6G9J1Ii".green}                                       *"
-    puts '*                                                                                    *'
-    puts '**************************************************************************************'
+    puts '**************************************************************************************************'
+    puts "* #{"USAGE".red}: bin/rake google_drive:import #{"FILE='<file id>'".green} DELETE'<language || all>' LANGUAGE='0..2' *"
+    puts '*                                                                                                *'
+    puts '* Valid languages:                                                                               *'
+    puts '*  - 0 for English (default)                                                                     *'
+    puts '*  - 1 for Portuguese                                                                            *'
+    puts '*  - 2 for Italian                                                                               *'
+    puts '*'
+    puts '* File id can be retrived from the Google Drive Spreadsheet URL. It looks like this:             *'
+    puts "* #{"10BVvv01c6r2igfj5t8-XaFOP4lBvbbbxj1vZ6G9J1Ii".green}                                                   *"
+    puts '*                                                                                                *'
+    puts '**************************************************************************************************'
   end
 
   def import_words(importer)
     bar = RakeProgressbar.new(importer.rows_count)
     importer.start! do |row|
       bar.inc
-      # puts row[0]
     end
+
     bar.finished
 
     puts ''
     puts 'Ignored words:'
-    Word.inactive.each do |inactive|
+    Word.where(language: importer.language).inactive.each do |inactive|
       puts inactive.word
     end
-    # TODO: CHECK THE NOKOGIRI GEM: https://github.com/sparklemotion/nokogiri
   end
 
   def prepare_database
