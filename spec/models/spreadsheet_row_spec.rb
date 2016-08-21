@@ -13,6 +13,13 @@ describe SpreadsheetRow do
       expect(entry.example).to eq('reel in a large fish')
       expect(entry.language).to eq(language)
     end
+
+    context 'word cleanup' do
+      let(:row) { ['reeling*,!.:', 'Sustained noise, as from hammering', 'reel in a large fish', 'noise, sound'] }
+      let(:entry) { subject.to_w }
+
+      it { expect(entry.word).to eq('reeling') }
+    end
   end
 
   describe '#tags' do
@@ -30,6 +37,21 @@ describe SpreadsheetRow do
       it 'removes extra spaces' do
         row[3] = '   noise, sound   '
         expect(subject.tags).to eq('noise, sound')
+      end
+
+      it 'removes exclamations' do
+        row[3] = 'noise!'
+        expect(subject.tags).to eq('noise')
+      end
+
+      it 'removes points' do
+        row[3] = 'noise.'
+        expect(subject.tags).to eq('noise')
+      end
+
+      it 'removes colons' do
+        row[3] = 'noise:'
+        expect(subject.tags).to eq('noise')
       end
     end
 
