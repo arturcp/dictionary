@@ -13,7 +13,7 @@ class SpreadsheetRow
 
   def to_w
     Word.new(
-      word: row[WORD].downcase,
+      word: format(row[WORD]),
       meaning: row[MEANING],
       example: row[EXAMPLE],
       language: language
@@ -27,6 +27,6 @@ class SpreadsheetRow
   private
 
   def format(text)
-    text.to_s.downcase.delete('*').strip
+    text.to_s.downcase.delete('*,!.:').strip
   end
 end
