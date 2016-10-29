@@ -32,7 +32,7 @@ describe SearchResult do
       end
 
       context 'when the query does not match word case' do
-        subject { SearchResult.new(search_type: SearchType::MEANING, query: 'Care') }
+        subject { SearchResult.new(search_type: search_type, query: 'Care') }
 
         it { expect(subject.words.count).to eq(1) }
       end
@@ -54,7 +54,7 @@ describe SearchResult do
       end
 
       context 'when the query does not match word case' do
-        subject { SearchResult.new(search_type: SearchType::WORD, query: 'Behest') }
+        subject { SearchResult.new(search_type: search_type, query: 'Behest') }
 
         it { expect(subject.words.count).to eq(1) }
       end
